@@ -329,8 +329,10 @@ class TSOTAB_Widget extends WP_Widget {
 		// ── Widget (frontend) ─────────────────────────────────────────────────
 
 		public function widget( $args, $instance ) {
-			// phpcs:ignore WordPress.PHP.DontExtract -- $before_widget, $after_widget, $widget_id.
-			extract( $args );
+			$args          = is_array( $args ) ? $args : array();
+			$before_widget = isset( $args['before_widget'] ) ? $args['before_widget'] : '';
+			$after_widget  = isset( $args['after_widget'] ) ? $args['after_widget'] : '';
+			$widget_id     = $this->resolve_widget_html_id( $args );
 
 			wp_enqueue_script( 'tsotab-widget' );
 			wp_enqueue_style( 'tsotab-widget' );
@@ -678,6 +680,42 @@ class TSOTAB_Widget extends WP_Widget {
 		}
 
 		// ── Helpers ───────────────────────────────────────────────────────────
+
+		/**
+		 * HTML id for the widget wrapper (sidebar args or WP_Widget::$id).
+		 *
+		 * `the_widget()`, legacy-widget blocks, and some page builders call
+		 * widget() without `$args['widget_id']`. extract() then left $widget_id
+		 * undefined (PHP 8+ warning).
+		 *
+		 * @param array $args Sidebar args from WP_Widget::widget().
+		 * @return string
+		 */
+		private function resolve_widget_html_id( $args ) {
+			$candidates = array();
+			if ( isset( $args['widget_id'] ) ) {
+				$candidates[] = $args['widget_id'];
+			}
+			if ( ! empty( $this->id ) ) {
+				$candidates[] = $this->id;
+			}
+			$id_base = isset( $this->id_base ) ? (string) $this->id_base : 'wpt_widget';
+			$number  = isset( $this->number ) ? $this->number : 0;
+			$candidates[] = $id_base . '-' . $number;
+			$candidates[] = 'wpt_widget-0';
+
+			foreach ( $candidates as $candidate ) {
+				if ( ! is_scalar( $candidate ) ) {
+					continue;
+				}
+				$sanitized = sanitize_html_class( (string) $candidate );
+				if ( '' !== $sanitized ) {
+					return $sanitized;
+				}
+			}
+
+			return 'wpt_widget-0';
+		}
 
 		public function excerpt( $limit = 10 ) {
 			$limit++;

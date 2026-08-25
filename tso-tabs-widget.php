@@ -5,7 +5,7 @@
  * Author:      Tu Soporte Online
  * Author URI:  https://www.tusoporteonline.es/blog
  * Plugin URI:  https://www.tusoporteonline.es/blog
- * Version:     1.0.0
+ * Version:     1.0.1
  * Text Domain: tso-tabs-widget
  * Domain Path: /languages
  * Requires at least: 6.1
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TSOTAB_VERSION', '1.0.0' );
+define( 'TSOTAB_VERSION', '1.0.1' );
 define( 'TSOTAB_FILE', __FILE__ );
 define( 'TSOTAB_PATH', plugin_dir_path( TSOTAB_FILE ) );
 define( 'TSOTAB_DIR', TSOTAB_PATH );

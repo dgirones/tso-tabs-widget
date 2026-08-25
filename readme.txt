@@ -3,7 +3,7 @@ Contributors: deadko
 Tags: widget, tabs, popular posts, recent posts, ajax
 Requires at least: 6.1
 Tested up to: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -52,6 +52,9 @@ Yes. Install the corresponding language pack from WordPress.org or place `.mo` f
 
 == Changelog ==
 
+= 1.0.1 =
+* Fix PHP 8 warning: undefined $widget_id when the widget is rendered without sidebar widget_id (blocks, the_widget(), page builders)
+
 = 1.0.0 =
 * Initial TSO Tabs Widget release for WordPress.org
 * AJAX tabbed widget: Popular, Recent, Comments, Tags
@@ -61,6 +64,9 @@ Yes. Install the corresponding language pack from WordPress.org or place `.mo` f
 * Languages: Catalan (ca_ES), Spanish (es_ES), English (en)
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Fixes a PHP 8 warning when the widget HTML id is missing from sidebar args.
 
 = 1.0.0 =
 Initial release.

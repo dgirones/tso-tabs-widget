@@ -1,6 +1,6 @@
 /*
  * TSO Tabs Widget — front-end tab AJAX loader.
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 
 /**
