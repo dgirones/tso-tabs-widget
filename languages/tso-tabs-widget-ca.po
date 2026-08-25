@@ -1,0 +1,25 @@
+# Catalan translation for TSO Tabs Widget.
+# Copyright (C) 2026 Tu Soporte Online
+msgid ""
+msgstr ""
+"Project-Id-Version: TSO Tabs Widget 1.0.0\n"
+"Report-Msgid-Bugs-To: https://www.tusoporteonline.es/blog\n"
+"POT-Creation-Date: 2026-06-30 12:00+0000\n"
+"PO-Revision-Date: 2026-06-30 12:00+0000\n"
+"Last-Translator: Tu Soporte Online\n"
+"Language-Team: Catalan\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: tso-tabs-widget\n"
+
+msgid "AJAX tabbed sidebar widget (Popular, Recent, Comments, Tags). PHP 7.4+, WP 6.1+, cache-plugin friendly."
+msgstr "Widget de pestanyes AJAX per a la barra lateral (Popular, Recent, Comentaris, Etiquetes). PHP 7.4+, WP 6.1+, compatible amb plugins de caché."
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Donate"
+msgstr "Donar"

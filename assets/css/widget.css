@@ -1,0 +1,366 @@
+/*
+Plugin Name: TSO Tabs Widget
+Description: CSS per al widget de pestanyes. Colors del tema Tu Soporte Online.
+Version: 1.0.0
+*/
+
+/* ── Contenidor ─────────────────────────────────────────────────────────── */
+.wpt_widget_content {
+    position: relative;
+    border: 1px solid #E4E4E4;
+    background: #fff;
+}
+
+.wpt_widget_content *,
+.wpt_widget_content *::before,
+.wpt_widget_content *::after {
+    box-sizing: border-box;
+}
+
+.wpt_widget_content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.wpt_widget_content a {
+    color: #444;
+}
+
+/* ── Pestanyes ────────────────────────────────────────────────────────────── */
+.wpt_widget_content ul.wpt-tabs {
+    list-style: none !important;
+    margin:  0 !important;
+    padding: 0 !important;
+    display: block;
+    overflow: hidden;
+    background: #f5f5f5;
+    border-bottom: 2px solid #1e73be;
+}
+
+.wpt_widget_content ul.wpt-tabs li {
+    list-style: none !important;
+    display: block;
+    float: left;
+    text-align: center;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 50%;
+}
+
+/* Amplades segons nombre de pestanyes actives */
+.wpt_widget_content ul.has-1-tabs li { width: 100%; float: none; margin: 0 auto; }
+.wpt_widget_content ul.has-2-tabs li { width: 50%; }
+.wpt_widget_content ul.has-3-tabs li { width: 33.33%; }
+.wpt_widget_content ul.has-4-tabs li { width: 50%; }
+
+/* Correcció visual per a 4 pestanyes (2 files) */
+.wpt_widget_content .has-4-tabs .tab_title.selected a {
+    border-bottom: 1px solid #E4E4E4;
+}
+.wpt_widget_content .has-4-tabs .tab_title:nth-child(3) a {
+    border-left: 0;
+}
+
+/* Enllaç de pestanya */
+.wpt_widget_content .tab_title a {
+    display: block;
+    background: #f5f5f5;
+    border-left: 1px solid #E4E4E4;
+    border-bottom: 1px solid #E4E4E4;
+    padding: 8px 4px;
+    line-height: 1.4;
+    text-decoration: none !important;
+    position: relative;
+    font-weight: 700;
+    font-size: 12px;
+    color: #555 !important;
+    transition: background .15s, color .15s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wpt_widget_content .tab_title:first-child a {
+    border-left: 0;
+}
+
+.wpt_widget_content .tab_title a:hover {
+    background: #eaf3fb;
+    color: #1e73be !important;
+}
+
+/* Pestanya activa */
+.wpt_widget_content .tab_title.selected a {
+    background: #fff;
+    border-bottom: 2px solid #fff;
+    color: #1e73be !important;
+    margin-bottom: -1px;
+}
+
+/* ── Àrea de contingut ───────────────────────────────────────────────────── */
+.wpt_widget_content .inside {
+    background: #fff;
+    padding-top: 10px;
+}
+
+.wpt_widget_content .tab-content li {
+    list-style-type: none !important;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 8px 0 !important;
+    padding: 0 8px 12px 8px;
+    border-bottom: 1px solid #F0F0F0;
+    text-align: left;
+    color: #444;
+    background: none;
+    position: relative;
+}
+
+.wpt_widget_content .tab-content li:last-child {
+    border: none;
+    margin-bottom: 0 !important;
+}
+
+.wpt_widget_content .tab-content li:first-child {
+    padding-top: 5px;
+}
+
+/* ── Layout del <li> de post: flexbox ────────────────────────────────────── */
+.wpt_widget_content .tab-content li.wpt-post-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ── Miniatures ──────────────────────────────────────────────────────────── */
+.wpt_thumb_small {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    overflow: hidden;
+}
+
+.wpt_thumb_small img,
+.wpt_thumb_small .wpt-placeholder {
+    width: 52px !important;
+    height: 52px !important;
+    object-fit: cover;
+    border-radius: 3px;
+    display: block;
+}
+
+.wpt_thumb_large {
+    flex-shrink: 0;
+    max-width: 100%;
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Placeholder quan no hi ha miniatura */
+.wpt_widget_content .wpt-placeholder {
+    background: #f0f0f0;
+    display: block;
+}
+
+/* Bloc de text al costat de la miniatura: ocupa tot l'espai disponible */
+.wpt_widget_content .wpt-post-text {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* ── Títol del post ─────────────────────────────────────────────────────── */
+.wpt_widget_content .entry-title {
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.wpt_widget_content .entry-title a {
+    color: #1e73be !important;
+    text-decoration: none !important;
+    transition: color .15s;
+}
+
+.wpt_widget_content .entry-title a:hover {
+    color: #d6993a !important;
+    text-decoration: underline !important;
+}
+
+/* ── Meta (data, comentaris) ────────────────────────────────────────────── */
+.wpt_widget_content .wpt-postmeta,
+.wpt_comment_content,
+.wpt_excerpt {
+    color: #999;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.wpt_widget_content .wp-post-image {
+    margin: 0 !important;
+}
+
+/* ── Comentaris ──────────────────────────────────────────────────────────── */
+.wpt_avatar {
+    margin-right: 10px;
+    float: left;
+    margin-top: 4px;
+}
+
+.wpt_avatar img {
+    border-radius: 50%;
+    display: block;
+}
+
+.wpt_comment_content p,
+.wpt_excerpt p {
+    margin-bottom: 0;
+}
+
+.wpt_comment_meta {
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.wpt_comment_meta a {
+    color: #1e73be !important;
+    text-decoration: none !important;
+}
+
+.wpt_comment_meta a:hover {
+    color: #d6993a !important;
+}
+
+/* ── Pestanya Etiquetes ──────────────────────────────────────────────────── */
+.wpt_widget_content #tags-tab-content {
+    padding-bottom: 10px;
+}
+
+.wpt_widget_content #tags-tab-content ul {
+    margin: 0 !important;
+    overflow: hidden;
+    padding: 0 10px !important;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
+}
+
+.wpt_widget_content #tags-tab-content ul li {
+    width: auto !important;
+    color: #444 !important;
+    margin-bottom: 0 !important;
+    list-style: none !important;
+    display: inline-block !important;
+    padding: 0 !important;
+    margin: 3px 3px 0 0 !important;
+    float: none !important;
+    font-size: 12px;
+    border-bottom: none !important;
+}
+
+.wpt_widget_content #tags-tab-content ul li a {
+    padding: 5px 8px;
+    background: #f5f5f5;
+    border: 1px solid #E4E4E4;
+    border-radius: 3px;
+    white-space: nowrap;
+    display: block;
+    color: #1e73be !important;
+    text-decoration: none !important;
+    font-size: 12px;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+.wpt_widget_content #tags-tab-content ul li a:hover {
+    background: #1e73be;
+    color: #fff !important;
+    border-color: #1e73be;
+}
+
+/* ── Paginació ───────────────────────────────────────────────────────────── */
+.wpt_widget_content .wpt-pagination {
+    margin: 0;
+    width: 100%;
+    padding: 6px 0 12px;
+    float: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wpt_widget_content .wpt-pagination a {
+    margin: 0 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e73be !important;
+    text-decoration: none !important;
+    padding: 3px 7px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    transition: background .15s, color .15s;
+}
+
+.wpt_widget_content .wpt-pagination a:hover {
+    background: #1e73be;
+    color: #fff !important;
+    border-color: #1e73be;
+}
+
+.wpt-pagination a.next {
+    margin-left: auto;
+}
+
+/* ── Spinner de càrrega ──────────────────────────────────────────────────── */
+.wpt-loading {
+    min-height: 120px;
+}
+
+.wpt-loading::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 11;
+}
+
+.clear { clear: both; }
+
+.wpt-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+    z-index: 12;
+    border: 3px solid rgba(30, 115, 190, 0.2);
+    border-top-color: #1e73be;
+    border-radius: 50%;
+    animation: wpt_spin 0.6s linear infinite;
+}
+
+@keyframes wpt_spin {
+    from { transform: rotate(0deg);   }
+    to   { transform: rotate(360deg); }
+}
+
+/* ── Responsiu ───────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .wpt_widget_content .tab_title a {
+        font-size: 11px;
+        padding: 6px 2px;
+    }
+
+    .wpt_thumb_small,
+    .wpt_thumb_small img,
+    .wpt_thumb_small .wpt-placeholder {
+        width: 44px !important;
+        height: 44px !important;
+    }
+}

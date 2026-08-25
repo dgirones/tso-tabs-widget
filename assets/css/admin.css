@@ -1,0 +1,41 @@
+/*
+Plugin Name: TSO Tabs Widget
+Description: CSS mínim per al formulari d'admin. Evita el retallat de text de les etiquetes en 2 columnes.
+Version: 1.0.0
+*/
+
+/*
+ * Les etiquetes en 2 columnes del formulari del widget necessiten
+ * display:block + width:50% + float:left per mantenir la maquetació original.
+ * Afegim white-space:normal i overflow:visible per evitar que el text es retalli.
+ */
+.wpt_options_form .wpt-col-label {
+    display: block;
+    float: left;
+    width: 50%;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    overflow: visible;
+    white-space: normal;
+    font-size: 13px;
+    line-height: 1.5;
+    padding-right: 6px;
+}
+
+.wpt_options_form .wpt-col-label input[type="checkbox"] {
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.wpt_options_form .wpt-col-label input[type="number"] {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+/* Neteja el float després del grup de 2 columnes */
+.wpt_options_form .wpt_select_tabs::after,
+.wpt_options_form .wpt_tab_order::after {
+    content: "";
+    display: table;
+    clear: both;
+}
