@@ -68,6 +68,10 @@ class TSOTAB_Widget extends WP_Widget {
 				array(
 					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 					'nonce'   => wp_create_nonce( TSOTAB_NONCE_AJAX ),
+					'i18n'    => array(
+						'timeoutError' => esc_html__( 'Timeout loading content.', 'tso-tabs-widget' ),
+						'loadError'    => esc_html__( 'Error loading content.', 'tso-tabs-widget' ),
+					),
 				)
 			);
 			wp_register_style(
@@ -369,7 +373,7 @@ class TSOTAB_Widget extends WP_Widget {
 					<?php foreach ( $available_tabs as $tab => $label ) : ?>
 						<?php if ( ! empty( $tabs[ $tab ] ) ) : ?>
 							<li class="tab_title">
-								<a href="#" id="<?php echo esc_attr( $tab ); ?>-tab">
+								<a href="#" id="<?php echo esc_attr( $widget_id . '-' . $tab . '-tab' ); ?>">
 									<?php echo esc_html( $label ); ?>
 								</a>
 							</li>
@@ -379,16 +383,16 @@ class TSOTAB_Widget extends WP_Widget {
 				<div class="clear"></div>
 				<div class="inside">
 					<?php if ( ! empty( $tabs['popular'] ) ) : ?>
-						<div id="popular-tab-content"  class="tab-content"></div>
+						<div id="<?php echo esc_attr( $widget_id . '-popular-tab-content' ); ?>" class="tab-content"></div>
 					<?php endif; ?>
 					<?php if ( ! empty( $tabs['recent'] ) ) : ?>
-						<div id="recent-tab-content"   class="tab-content"></div>
+						<div id="<?php echo esc_attr( $widget_id . '-recent-tab-content' ); ?>" class="tab-content"></div>
 					<?php endif; ?>
 					<?php if ( ! empty( $tabs['comments'] ) ) : ?>
-						<div id="comments-tab-content" class="tab-content"><ul></ul></div>
+						<div id="<?php echo esc_attr( $widget_id . '-comments-tab-content' ); ?>" class="tab-content"><ul></ul></div>
 					<?php endif; ?>
 					<?php if ( ! empty( $tabs['tags'] ) ) : ?>
-						<div id="tags-tab-content"     class="tab-content"><ul></ul></div>
+						<div id="<?php echo esc_attr( $widget_id . '-tags-tab-content' ); ?>" class="tab-content"><ul></ul></div>
 					<?php endif; ?>
 					<div class="clear"></div>
 				</div>
@@ -667,10 +671,10 @@ class TSOTAB_Widget extends WP_Widget {
 			?>
 			<div class="wpt-pagination">
 				<?php if ( $page > 1 ) : ?>
-					<a href="#" class="previous"><span><?php esc_html_e( '&laquo; Previous', 'tso-tabs-widget' ); ?></span></a>
+					<a href="#" class="previous"><span><?php esc_html_e( '« Previous', 'tso-tabs-widget' ); ?></span></a>
 				<?php endif; ?>
 				<?php if ( $page !== $last_page ) : ?>
-					<a href="#" class="next"><span><?php esc_html_e( 'Next &raquo;', 'tso-tabs-widget' ); ?></span></a>
+					<a href="#" class="next"><span><?php esc_html_e( 'Next »', 'tso-tabs-widget' ); ?></span></a>
 				<?php endif; ?>
 			</div>
 			<div class="clear"></div>

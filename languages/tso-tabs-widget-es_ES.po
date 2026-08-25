@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TSO Tabs Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: https://www.tusoporteonline.es/blog\n"
-"POT-Creation-Date: 2026-06-30 12:00+0000\n"
-"PO-Revision-Date: 2026-06-30 12:00+0000\n"
+"POT-Creation-Date: 2026-08-25 12:00+0000\n"
+"PO-Revision-Date: 2026-08-25 12:00+0000\n"
 "Last-Translator: Tu Soporte Online\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
@@ -23,3 +23,111 @@ msgstr "Blog"
 
 msgid "Donate"
 msgstr "Donar"
+
+msgid "Display popular posts, recent posts, comments, and tags in tabbed format."
+msgstr "Muestra entradas populares, recientes, comentarios y etiquetas en formato de pestañas."
+
+msgid "TSO Tabs Widget"
+msgstr "TSO Tabs Widget"
+
+msgid "Select Tabs"
+msgstr "Seleccionar pestañas"
+
+msgid "Popular Tab"
+msgstr "Pestaña Popular"
+
+msgid "Recent Tab"
+msgstr "Pestaña Reciente"
+
+msgid "Comments Tab"
+msgstr "Pestaña Comentarios"
+
+msgid "Tags Tab"
+msgstr "Pestaña Etiquetas"
+
+msgid "Tab Order"
+msgstr "Orden de las pestañas"
+
+msgid "Popular"
+msgstr "Popular"
+
+msgid "Recent"
+msgstr "Reciente"
+
+msgid "Comments"
+msgstr "Comentarios"
+
+msgid "Tags"
+msgstr "Etiquetas"
+
+msgid "Advanced Options"
+msgstr "Opciones avanzadas"
+
+msgid "Allow pagination"
+msgstr "Permitir paginación"
+
+msgid "Number of posts to show:"
+msgstr "Número de entradas a mostrar:"
+
+msgid "Title length (words):"
+msgstr "Longitud del título (palabras):"
+
+msgid "Show post thumbnails"
+msgstr "Mostrar miniaturas de las entradas"
+
+msgid "Thumbnail size:"
+msgstr "Tamaño de la miniatura:"
+
+msgid "Small"
+msgstr "Pequeña"
+
+msgid "Large"
+msgstr "Grande"
+
+msgid "Show post date"
+msgstr "Mostrar fecha de la entrada"
+
+msgid "Show number of comments"
+msgstr "Mostrar número de comentarios"
+
+msgid "Show post excerpt"
+msgstr "Mostrar extracto de la entrada"
+
+msgid "Excerpt length (words):"
+msgstr "Longitud del extracto (palabras):"
+
+msgid "Number of comments on Comments Tab:"
+msgstr "Número de comentarios en la pestaña Comentarios:"
+
+msgid "Show avatars on Comments Tab"
+msgstr "Mostrar avatares en la pestaña Comentarios"
+
+msgid "Unable to load tab content"
+msgstr "No se ha podido cargar el contenido de la pestaña"
+
+msgid "No comments yet."
+msgstr "Aún no hay comentarios."
+
+msgid "No tags created."
+msgstr "No se han creado etiquetas."
+
+msgid "No Comment"
+msgstr "Ningún comentario"
+
+msgid "One Comment"
+msgstr "Un comentario"
+
+msgid "« Previous"
+msgstr "« Anterior"
+
+msgid "Next »"
+msgstr "Siguiente »"
+
+msgid "Thank you for using TSO Tabs Widget. We hope you enjoy it!"
+msgstr "Gracias por usar TSO Tabs Widget. ¡Esperamos que lo disfrutes!"
+
+msgid "Timeout loading content."
+msgstr "Tiempo de espera agotado al cargar el contenido."
+
+msgid "Error loading content."
+msgstr "Error al cargar el contenido."

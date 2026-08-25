@@ -48,9 +48,10 @@ function tsotabLoadTabContent( tab_name, page_num, container, args_obj ) {
 			},
 			error: function ( jqXHR, textStatus ) {
 				$container.removeClass( 'wpt-loading' );
+				var i18n = ( tsotabWidgetConfig.i18n || {} );
 				var msg = textStatus === 'timeout'
-					? 'Timeout loading content.'
-					: 'Error ' + jqXHR.status + ' loading content.';
+					? ( i18n.timeoutError || 'Timeout loading content.' )
+					: ( i18n.loadError || 'Error loading content.' ) + ' (' + jqXHR.status + ')';
 				$tabContent.html( '<p style="padding:10px;color:#999;font-size:12px;">' + msg + '</p>' )
 					.fadeIn()
 					.siblings()

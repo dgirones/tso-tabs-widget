@@ -35,6 +35,7 @@ define( 'TSOTAB_NONCE_VIEW', 'tsotab_view_count_nonce' );
 define( 'TSOTAB_NONCE_VIEW_LEGACY', 'tsotab_view_nonce' );
 
 require_once TSOTAB_PATH . 'includes/tsotab-storage.php';
+require_once TSOTAB_PATH . 'includes/tsotab-i18n.php';
 require_once TSOTAB_PATH . 'includes/tsotab-support.php';
 require_once TSOTAB_PATH . 'includes/class-tsotab-widget.php';
 require_once TSOTAB_PATH . 'includes/tsotab-view-count.php';
