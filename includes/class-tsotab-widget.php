@@ -329,8 +329,9 @@ class TSOTAB_Widget extends WP_Widget {
 		// ── Widget (frontend) ─────────────────────────────────────────────────
 
 		public function widget( $args, $instance ) {
-			// phpcs:ignore WordPress.PHP.DontExtract -- $before_widget, $after_widget, $widget_id.
-			extract( $args );
+			$before_widget = $args['before_widget'];
+			$after_widget  = $args['after_widget'];
+			$widget_id     = ! empty( $args['widget_id'] ) ? $args['widget_id'] : $this->id;
 
 			wp_enqueue_script( 'tsotab-widget' );
 			wp_enqueue_style( 'tsotab-widget' );
