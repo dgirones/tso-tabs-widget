@@ -31,8 +31,8 @@ Version: 1.0.0
     list-style: none !important;
     margin:  0 !important;
     padding: 0 !important;
-    display: block;
-    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
     background: #f5f5f5;
     border-bottom: 2px solid #1e73be;
 }
@@ -40,24 +40,21 @@ Version: 1.0.0
 .wpt_widget_content ul.wpt-tabs li {
     list-style: none !important;
     display: block;
-    float: left;
+    flex: 1 1 auto;
     text-align: center;
     margin: 0 !important;
     padding: 0 !important;
-    width: 50%;
+    min-width: 0;
 }
 
 /* Amplades segons nombre de pestanyes actives */
-.wpt_widget_content ul.has-1-tabs li { width: 100%; float: none; margin: 0 auto; }
-.wpt_widget_content ul.has-2-tabs li { width: 50%; }
-.wpt_widget_content ul.has-3-tabs li { width: 33.33%; }
-.wpt_widget_content ul.has-4-tabs li { width: 50%; }
+.wpt_widget_content ul.has-1-tabs li { flex: 0 0 100%; max-width: 100%; }
+.wpt_widget_content ul.has-2-tabs li { flex: 0 0 50%; max-width: 50%; }
+.wpt_widget_content ul.has-3-tabs li { flex: 0 0 33.333%; max-width: 33.333%; }
+.wpt_widget_content ul.has-4-tabs li { flex: 0 0 50%; max-width: 50%; }
 
 /* Correcció visual per a 4 pestanyes (2 files) */
-.wpt_widget_content .has-4-tabs .tab_title.selected a {
-    border-bottom: 1px solid #E4E4E4;
-}
-.wpt_widget_content .has-4-tabs .tab_title:nth-child(3) a {
+.wpt_widget_content ul.has-4-tabs .tab_title:nth-child(3) a {
     border-left: 0;
 }
 
@@ -92,20 +89,30 @@ Version: 1.0.0
 /* Pestanya activa */
 .wpt_widget_content .tab_title.selected a {
     background: #fff;
-    border-bottom: 2px solid #fff;
     color: #1e73be !important;
-    margin-bottom: -1px;
+    box-shadow: inset 0 -2px 0 #fff;
+    position: relative;
+    z-index: 1;
 }
 
 /* ── Àrea de contingut ───────────────────────────────────────────────────── */
 .wpt_widget_content .inside {
     background: #fff;
     padding-top: 10px;
+    overflow: hidden;
+}
+
+.wpt_widget_content .inside > .tab-content {
+    display: none;
+}
+
+.wpt_widget_content .inside > .tab-content.tsotab-visible {
+    display: block;
 }
 
 .wpt_widget_content .tab-content li {
     list-style-type: none !important;
-    float: left;
+    display: block;
     width: 100%;
     box-sizing: border-box;
     margin: 0 0 8px 0 !important;
@@ -236,11 +243,11 @@ Version: 1.0.0
 }
 
 /* ── Pestanya Etiquetes ──────────────────────────────────────────────────── */
-.wpt_widget_content #tags-tab-content {
+.wpt_widget_content .tab-content[data-tab="tags"] {
     padding-bottom: 10px;
 }
 
-.wpt_widget_content #tags-tab-content ul {
+.wpt_widget_content .tab-content[data-tab="tags"] ul {
     margin: 0 !important;
     overflow: hidden;
     padding: 0 10px !important;
@@ -249,7 +256,7 @@ Version: 1.0.0
     line-height: 0;
 }
 
-.wpt_widget_content #tags-tab-content ul li {
+.wpt_widget_content .tab-content[data-tab="tags"] ul li {
     width: auto !important;
     color: #444 !important;
     margin-bottom: 0 !important;
@@ -262,7 +269,7 @@ Version: 1.0.0
     border-bottom: none !important;
 }
 
-.wpt_widget_content #tags-tab-content ul li a {
+.wpt_widget_content .tab-content[data-tab="tags"] ul li a {
     padding: 5px 8px;
     background: #f5f5f5;
     border: 1px solid #E4E4E4;
@@ -275,7 +282,7 @@ Version: 1.0.0
     transition: background .15s, color .15s, border-color .15s;
 }
 
-.wpt_widget_content #tags-tab-content ul li a:hover {
+.wpt_widget_content .tab-content[data-tab="tags"] ul li a:hover {
     background: #1e73be;
     color: #fff !important;
     border-color: #1e73be;
@@ -286,10 +293,10 @@ Version: 1.0.0
     margin: 0;
     width: 100%;
     padding: 6px 0 12px;
-    float: left;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    clear: both;
 }
 
 .wpt_widget_content .wpt-pagination a {

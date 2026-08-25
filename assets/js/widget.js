@@ -3,10 +3,15 @@
  * Version: 1.0.0
  */
 
+function tsotabShowTabContent( $container, $tabContent ) {
+	$container.find( '.inside > .tab-content' ).removeClass( 'tsotab-visible' );
+	$tabContent.addClass( 'tsotab-visible' );
+}
+
 /**
  * Load tab content via AJAX.
  *
- * @param {string} tab_name   Tab id (popular|recent|comments|tags).
+ * @param {string} tab_slug   Tab slug (popular|recent|comments|tags).
  * @param {number} page_num   Page number.
  * @param {jQuery} container  .wpt_widget_content element.
  * @param {Object} args_obj   Widget settings.
@@ -40,11 +45,8 @@ function tsotabLoadTabContent( tab_slug, page_num, container, args_obj ) {
 				$container.removeClass( 'wpt-loading' );
 				$tabContent
 					.html( response )
-					.data( 'loaded', 1 )
-					.hide()
-					.fadeIn()
-					.siblings()
-					.hide();
+					.data( 'loaded', 1 );
+				tsotabShowTabContent( $container, $tabContent );
 			},
 			error: function ( jqXHR, textStatus ) {
 				$container.removeClass( 'wpt-loading' );
@@ -52,10 +54,8 @@ function tsotabLoadTabContent( tab_slug, page_num, container, args_obj ) {
 				var msg = textStatus === 'timeout'
 					? ( i18n.timeoutError || 'Timeout loading content.' )
 					: ( i18n.loadError || 'Error loading content.' ) + ' (' + jqXHR.status + ')';
-				$tabContent.html( '<p style="padding:10px;color:#999;font-size:12px;">' + msg + '</p>' )
-					.fadeIn()
-					.siblings()
-					.hide();
+				$tabContent.html( '<p style="padding:10px;color:#999;font-size:12px;">' + msg + '</p>' );
+				tsotabShowTabContent( $container, $tabContent );
 				if ( window.console ) {
 					console.error( 'TSO Tabs Widget AJAX error [' + tab_slug + ']:', textStatus, jqXHR.status, jqXHR.responseText );
 				}
@@ -63,7 +63,7 @@ function tsotabLoadTabContent( tab_slug, page_num, container, args_obj ) {
 		} );
 
 	} else {
-		$tabContent.fadeIn().siblings().hide();
+		tsotabShowTabContent( $container, $tabContent );
 	}
 }
 
