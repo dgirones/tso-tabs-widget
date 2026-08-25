@@ -344,9 +344,17 @@ class TSOTAB_Widget extends WP_Widget {
 			$tab_order = isset( $instance['tab_order'] ) ? $instance['tab_order']
 				: array( 'popular' => 1, 'recent' => 2, 'comments' => 3, 'tags' => 4 );
 
-			$tabs_count = count( $tabs );
-			if ( $tabs_count <= 1 )    { $tabs_count = 1; }
-			elseif ( $tabs_count > 3 ) { $tabs_count = 4; }
+			$tabs_count = 0;
+			foreach ( array( 'popular', 'recent', 'comments', 'tags' ) as $tab_key ) {
+				if ( ! empty( $tabs[ $tab_key ] ) ) {
+					$tabs_count++;
+				}
+			}
+			if ( $tabs_count < 1 ) {
+				$tabs_count = 1;
+			} elseif ( $tabs_count > 3 ) {
+				$tabs_count = 4;
+			}
 
 			$available_tabs = array(
 				'popular'  => __( 'Popular',  'tso-tabs-widget' ),
