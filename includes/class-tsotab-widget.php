@@ -373,7 +373,9 @@ class TSOTAB_Widget extends WP_Widget {
 					<?php foreach ( $available_tabs as $tab => $label ) : ?>
 						<?php if ( ! empty( $tabs[ $tab ] ) ) : ?>
 							<li class="tab_title">
-								<a href="#" id="<?php echo esc_attr( $widget_id . '-' . $tab . '-tab' ); ?>">
+								<a href="#"
+									id="<?php echo esc_attr( $widget_id . '-' . $tab . '-tab' ); ?>"
+									data-tab="<?php echo esc_attr( $tab ); ?>">
 									<?php echo esc_html( $label ); ?>
 								</a>
 							</li>
@@ -383,16 +385,16 @@ class TSOTAB_Widget extends WP_Widget {
 				<div class="clear"></div>
 				<div class="inside">
 					<?php if ( ! empty( $tabs['popular'] ) ) : ?>
-						<div id="<?php echo esc_attr( $widget_id . '-popular-tab-content' ); ?>" class="tab-content"></div>
+						<div id="<?php echo esc_attr( $widget_id . '-popular-tab-content' ); ?>" class="tab-content" data-tab="popular"></div>
 					<?php endif; ?>
 					<?php if ( ! empty( $tabs['recent'] ) ) : ?>
-						<div id="<?php echo esc_attr( $widget_id . '-recent-tab-content' ); ?>" class="tab-content"></div>
+						<div id="<?php echo esc_attr( $widget_id . '-recent-tab-content' ); ?>" class="tab-content" data-tab="recent"></div>
 					<?php endif; ?>
 					<?php if ( ! empty( $tabs['comments'] ) ) : ?>
-						<div id="<?php echo esc_attr( $widget_id . '-comments-tab-content' ); ?>" class="tab-content"><ul></ul></div>
+						<div id="<?php echo esc_attr( $widget_id . '-comments-tab-content' ); ?>" class="tab-content" data-tab="comments"><ul></ul></div>
 					<?php endif; ?>
 					<?php if ( ! empty( $tabs['tags'] ) ) : ?>
-						<div id="<?php echo esc_attr( $widget_id . '-tags-tab-content' ); ?>" class="tab-content"><ul></ul></div>
+						<div id="<?php echo esc_attr( $widget_id . '-tags-tab-content' ); ?>" class="tab-content" data-tab="tags"><ul></ul></div>
 					<?php endif; ?>
 					<div class="clear"></div>
 				</div>

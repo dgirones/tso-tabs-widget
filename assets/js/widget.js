@@ -11,10 +11,10 @@
  * @param {jQuery} container  .wpt_widget_content element.
  * @param {Object} args_obj   Widget settings.
  */
-function tsotabLoadTabContent( tab_name, page_num, container, args_obj ) {
+function tsotabLoadTabContent( tab_slug, page_num, container, args_obj ) {
 
 	var $container  = jQuery( container );
-	var $tabContent = $container.find( '#' + tab_name + '-tab-content' );
+	var $tabContent = $container.find( '.tab-content[data-tab="' + tab_slug + '"]' );
 	var isLoaded    = $tabContent.data( 'loaded' );
 
 	if ( ! isLoaded || page_num !== 1 ) {
@@ -31,7 +31,7 @@ function tsotabLoadTabContent( tab_name, page_num, container, args_obj ) {
 			data:    {
 				action:        'tsotab_widget_content',
 				nonce:         tsotabWidgetConfig.nonce,
-				tab:           tab_name,
+				tab:           tab_slug,
 				page:          page_num,
 				args:          args_obj,
 				widget_number: $container.data( 'widget-number' )
@@ -57,7 +57,7 @@ function tsotabLoadTabContent( tab_name, page_num, container, args_obj ) {
 					.siblings()
 					.hide();
 				if ( window.console ) {
-					console.error( 'TSO Tabs Widget AJAX error [' + tab_name + ']:', textStatus, jqXHR.status, jqXHR.responseText );
+					console.error( 'TSO Tabs Widget AJAX error [' + tab_slug + ']:', textStatus, jqXHR.status, jqXHR.responseText );
 				}
 			}
 		} );
@@ -79,22 +79,22 @@ jQuery( document ).ready( function () {
 		$this.find( '.wpt-tabs a' ).click( function ( e ) {
 			e.preventDefault();
 			jQuery( this ).parent().addClass( 'selected' ).siblings().removeClass( 'selected' );
-			var tab_name = this.id.slice( 0, -4 );
-			tsotabLoadTabContent( tab_name, 1, $this, args );
+			var tab_slug = jQuery( this ).data( 'tab' );
+			tsotabLoadTabContent( tab_slug, 1, $this, args );
 		} );
 
 		$this.on( 'click', '.wpt-pagination a', function ( e ) {
 			e.preventDefault();
 			var $a       = jQuery( this );
 			var $pane    = $a.closest( '.tab-content' );
-			var tab_name = $pane.attr( 'id' ).slice( 0, -12 );
+			var tab_slug = $pane.data( 'tab' );
 			var page_num = parseInt( $pane.find( '.page_num' ).val(), 10 ) || 1;
 
 			if ( $a.hasClass( 'next' ) ) {
-				tsotabLoadTabContent( tab_name, page_num + 1, $this, args );
+				tsotabLoadTabContent( tab_slug, page_num + 1, $this, args );
 			} else {
 				$pane.data( 'loaded', 0 );
-				tsotabLoadTabContent( tab_name, page_num - 1, $this, args );
+				tsotabLoadTabContent( tab_slug, page_num - 1, $this, args );
 			}
 		} );
 
