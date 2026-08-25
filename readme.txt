@@ -30,6 +30,17 @@ Display popular posts, recent posts, comments and tags in tabbed format with AJA
 **Cache compatibility note:**
 The visit counter used by the Popular tab runs via AJAX so it works correctly with any full-page cache plugin.
 
+== External services ==
+
+This plugin may contact the following third-party services:
+
+**TSO activation ping** (`https://tusoporteonline.es/blog/pings/neteja.php`)
+* **What:** Anonymous plugin lifecycle ping on activate and deactivate.
+* **When:** Only when the plugin is activated or deactivated.
+* **Data sent:** Event type (`activate` or `deactivate`), plugin name, PHP major/minor version, and site hostname (no full URL or personal data).
+* **Terms of use:** https://www.tusoporteonline.es/blog
+* **Privacy policy:** https://www.tusoporteonline.es/blog
+
 == Installation ==
 
 1. Upload the `tso-tabs-widget` folder to `/wp-content/plugins/`.

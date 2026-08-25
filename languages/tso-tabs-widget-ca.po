@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TSO Tabs Widget 1.0.0\n"
 "Report-Msgid-Bugs-To: https://www.tusoporteonline.es/blog\n"
-"POT-Creation-Date: 2026-06-30 12:00+0000\n"
-"PO-Revision-Date: 2026-06-30 12:00+0000\n"
+"POT-Creation-Date: 2026-08-25 12:00+0000\n"
+"PO-Revision-Date: 2026-08-25 12:00+0000\n"
 "Last-Translator: Tu Soporte Online\n"
 "Language-Team: Catalan\n"
 "Language: ca\n"
@@ -23,3 +23,111 @@ msgstr "Blog"
 
 msgid "Donate"
 msgstr "Donar"
+
+msgid "Display popular posts, recent posts, comments, and tags in tabbed format."
+msgstr "Mostra entrades populars, recents, comentaris i etiquetes en format de pestanyes."
+
+msgid "TSO Tabs Widget"
+msgstr "TSO Tabs Widget"
+
+msgid "Select Tabs"
+msgstr "Selecciona pestanyes"
+
+msgid "Popular Tab"
+msgstr "Pestanya Popular"
+
+msgid "Recent Tab"
+msgstr "Pestanya Recent"
+
+msgid "Comments Tab"
+msgstr "Pestanya Comentaris"
+
+msgid "Tags Tab"
+msgstr "Pestanya Etiquetes"
+
+msgid "Tab Order"
+msgstr "Ordre de les pestanyes"
+
+msgid "Popular"
+msgstr "Popular"
+
+msgid "Recent"
+msgstr "Recent"
+
+msgid "Comments"
+msgstr "Comentaris"
+
+msgid "Tags"
+msgstr "Etiquetes"
+
+msgid "Advanced Options"
+msgstr "Opcions avançades"
+
+msgid "Allow pagination"
+msgstr "Permet la paginació"
+
+msgid "Number of posts to show:"
+msgstr "Nombre d'entrades a mostrar:"
+
+msgid "Title length (words):"
+msgstr "Longitud del títol (paraules):"
+
+msgid "Show post thumbnails"
+msgstr "Mostra miniatures de les entrades"
+
+msgid "Thumbnail size:"
+msgstr "Mida de la miniatura:"
+
+msgid "Small"
+msgstr "Petita"
+
+msgid "Large"
+msgstr "Gran"
+
+msgid "Show post date"
+msgstr "Mostra la data de l'entrada"
+
+msgid "Show number of comments"
+msgstr "Mostra el nombre de comentaris"
+
+msgid "Show post excerpt"
+msgstr "Mostra l'extracte de l'entrada"
+
+msgid "Excerpt length (words):"
+msgstr "Longitud de l'extracte (paraules):"
+
+msgid "Number of comments on Comments Tab:"
+msgstr "Nombre de comentaris a la pestanya Comentaris:"
+
+msgid "Show avatars on Comments Tab"
+msgstr "Mostra avatars a la pestanya Comentaris"
+
+msgid "Unable to load tab content"
+msgstr "No s'ha pogut carregar el contingut de la pestanya"
+
+msgid "No comments yet."
+msgstr "Encara no hi ha comentaris."
+
+msgid "No tags created."
+msgstr "No s'han creat etiquetes."
+
+msgid "No Comment"
+msgstr "Cap comentari"
+
+msgid "One Comment"
+msgstr "Un comentari"
+
+msgid "« Previous"
+msgstr "« Anterior"
+
+msgid "Next »"
+msgstr "Següent »"
+
+msgid "Thank you for using TSO Tabs Widget. We hope you enjoy it!"
+msgstr "Gràcies per utilitzar TSO Tabs Widget. Esperem que us agradi!"
+
+msgid "Timeout loading content."
+msgstr "Temps d'espera esgotat en carregar el contingut."
+
+msgid "Error loading content."
+msgstr "Error en carregar el contingut."

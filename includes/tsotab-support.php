@@ -56,10 +56,10 @@ function tsotab_gettext_with_locale_fallback( $english, $translated, $ca, $es ) 
 	}
 
 	$locale = function_exists( 'determine_locale' ) ? determine_locale() : get_locale();
-	if ( str_starts_with( $locale, 'ca' ) ) {
+	if ( tsotab_locale_starts_with( $locale, 'ca' ) ) {
 		return $ca;
 	}
-	if ( str_starts_with( $locale, 'es' ) ) {
+	if ( tsotab_locale_starts_with( $locale, 'es' ) ) {
 		return $es;
 	}
 
