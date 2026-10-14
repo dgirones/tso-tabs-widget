@@ -206,6 +206,55 @@ function tsotab_verify_widget_ajax_nonce() {
 }
 
 /**
+ * Admin AJAX URL for tab content (align with home URL when siteurl differs).
+ *
+ * @return string
+ */
+function tsotab_get_ajax_url() {
+	$ajax      = admin_url( 'admin-ajax.php' );
+	$home_path = wp_parse_url( home_url( '/' ), PHP_URL_PATH );
+	$ajax_path = wp_parse_url( $ajax, PHP_URL_PATH );
+
+	if ( is_string( $home_path ) && is_string( $ajax_path ) && '' !== $home_path ) {
+		$home_path = untrailingslashit( $home_path );
+		$expected  = $home_path . '/wp-admin/admin-ajax.php';
+		if ( $ajax_path !== $expected && 0 !== strpos( $ajax_path, $home_path . '/wp-admin/' ) ) {
+			$ajax = home_url( '/wp-admin/admin-ajax.php' );
+		}
+	}
+
+	/**
+	 * Filter the admin-ajax.php URL used for tab content requests.
+	 *
+	 * @param string $ajax Full admin-ajax URL.
+	 */
+	return (string) apply_filters( 'tsotab_ajax_url', $ajax );
+}
+
+/**
+ * Whether the widget tab AJAX request may proceed (nonce or public cache-safe read).
+ *
+ * @return bool
+ */
+function tsotab_verify_widget_ajax_request() {
+	if ( tsotab_verify_widget_ajax_nonce() ) {
+		return true;
+	}
+
+	if ( is_user_logged_in() ) {
+		return false;
+	}
+
+	/**
+	 * Allow public tab AJAX without a valid nonce (full-page cache compatibility).
+	 * Tab slug, pagination, and args are still validated in the handler.
+	 *
+	 * @param bool $allow Whether to allow the request without nonce.
+	 */
+	return (bool) apply_filters( 'tsotab_widget_ajax_public_without_nonce', true );
+}
+
+/**
  * Verify dismiss-notice AJAX nonce.
  *
  * @return bool
