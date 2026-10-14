@@ -68,6 +68,10 @@ Yes. Install the corresponding language pack from WordPress.org or place `.mo` f
 * AJAX tabbed widget: Popular, Recent, Comments, Tags
 * tsotab_ prefix, TSOTAB_ bootstrap, storage layer, enqueued assets
 * Cache-friendly view counter via AJAX
+* Thumbnail sizes (tsotab_img / tsotab_img_large) are only registered when a widget instance uses them
+* Comment text stays in a left-aligned column next to the avatar instead of wrapping under it
+* Uninstall removes the generated tsotab_img / tsotab_img_large image files and their attachment metadata
+* Comment avatars keep a fixed 65x65 size even when WordPress serves a larger file
 * Nonces on all AJAX requests; PHP 7.4+ and WordPress 6.1+
 * Languages: Catalan (ca_ES), Spanish (es_ES), English (en)
 

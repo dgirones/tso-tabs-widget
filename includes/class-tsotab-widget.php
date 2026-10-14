@@ -34,8 +34,9 @@ class TSOTAB_Widget extends WP_Widget {
 			add_action( 'wp_enqueue_scripts',    array( $this, 'register_front_assets' ) );
 
 			$widget_ops = array(
-				'classname'   => 'widget_wpt',
-				'description' => __( 'Display popular posts, recent posts, comments, and tags in tabbed format.', 'tso-tabs-widget' ),
+				'classname'             => 'widget_wpt',
+				'description'           => __( 'Display popular posts, recent posts, comments, and tags in tabbed format.', 'tso-tabs-widget' ),
+				'show_instance_in_rest' => true,
 			);
 
 			parent::__construct(
@@ -47,9 +48,47 @@ class TSOTAB_Widget extends WP_Widget {
 
 		// ── Init ──────────────────────────────────────────────────────────────
 
+		/**
+		 * Registers only the thumbnail sizes that a saved widget instance uses,
+		 * so WordPress does not create extra files for every upload.
+		 */
 		public function register_image_sizes() {
-			add_image_size( 'wp_review_small', 65,  65,  true );
-			add_image_size( 'wp_review_large', 320, 240, true );
+			$needed = $this->get_needed_thumb_sizes();
+
+			if ( in_array( 'small', $needed, true ) ) {
+				add_image_size( 'tsotab_img', 65, 65, true );
+			}
+			if ( in_array( 'large', $needed, true ) ) {
+				add_image_size( 'tsotab_img_large', 320, 240, true );
+			}
+		}
+
+		/**
+		 * Thumbnail sizes ('small' / 'large') used by the saved widget instances.
+		 *
+		 * @return string[]
+		 */
+		private function get_needed_thumb_sizes() {
+			$needed    = array();
+			$instances = get_option( $this->option_name, array() );
+
+			if ( ! is_array( $instances ) ) {
+				return $needed;
+			}
+
+			foreach ( $instances as $key => $instance ) {
+				if ( ! is_int( $key ) || ! is_array( $instance ) ) {
+					continue;
+				}
+				// Same defaults as the widget form: thumbnails on, small size.
+				$show_thumb = isset( $instance['show_thumb'] ) ? (int) $instance['show_thumb'] : 1;
+				if ( 1 !== $show_thumb ) {
+					continue;
+				}
+				$needed[] = ( isset( $instance['thumb_size'] ) && 'large' === $instance['thumb_size'] ) ? 'large' : 'small';
+			}
+
+			return array_unique( $needed );
 		}
 
 		// ── Scripts ───────────────────────────────────────────────────────────
@@ -86,6 +125,7 @@ class TSOTAB_Widget extends WP_Widget {
 
 		public function form( $instance ) {
 			$instance = wp_parse_args( (array) $instance, array(
+				'title'            => '',
 				'tabs'             => array( 'recent' => 1, 'popular' => 1, 'comments' => 0, 'tags' => 0 ),
 				'tab_order'        => array( 'popular' => 1, 'recent' => 2, 'comments' => 3, 'tags' => 4 ),
 				'allow_pagination' => 1,
@@ -105,6 +145,18 @@ class TSOTAB_Widget extends WP_Widget {
 			extract( $instance );
 			?>
 			<div class="wpt_options_form">
+
+				<p>
+					<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>">
+						<?php esc_html_e( 'Title:', 'tso-tabs-widget' ); ?>
+					</label>
+					<input class="widefat"
+						id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
+						name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>"
+						type="text"
+						value="<?php echo esc_attr( $title ); ?>" />
+					<small><?php esc_html_e( 'Leave blank to hide the title.', 'tso-tabs-widget' ); ?></small>
+				</p>
 
 				<h4><?php esc_html_e( 'Select Tabs', 'tso-tabs-widget' ); ?></h4>
 
@@ -304,6 +356,10 @@ class TSOTAB_Widget extends WP_Widget {
 		public function update( $new_instance, $old_instance ) {
 			$instance = $old_instance;
 
+			$instance['title'] = isset( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+			// Drop legacy hide_title (block editor isset bug left some instances stuck at 1).
+			unset( $instance['hide_title'] );
+
 			$allowed_tabs     = array( 'popular', 'recent', 'comments', 'tags' );
 			$raw_tabs         = isset( $new_instance['tabs'] ) ? (array) $new_instance['tabs'] : array();
 			$instance['tabs'] = array_intersect_key( $raw_tabs, array_flip( $allowed_tabs ) );
@@ -335,6 +391,8 @@ class TSOTAB_Widget extends WP_Widget {
 		public function widget( $args, $instance ) {
 			$before_widget = $args['before_widget'];
 			$after_widget  = $args['after_widget'];
+			$before_title  = $args['before_title'];
+			$after_title   = $args['after_title'];
 			$widget_id     = ! empty( $args['widget_id'] ) ? $args['widget_id'] : $this->id;
 
 			wp_enqueue_script( 'tsotab-widget' );
@@ -368,10 +426,25 @@ class TSOTAB_Widget extends WP_Widget {
 
 			// Args per passar al JS via data-attribute (evita inline script per CSP).
 			$js_instance = $instance;
-			unset( $js_instance['tabs'], $js_instance['tab_order'] );
+			unset( $js_instance['tabs'], $js_instance['tab_order'], $js_instance['title'], $js_instance['hide_title'] );
+
+			$title = isset( $instance['title'] ) ? $instance['title'] : '';
+			/**
+			 * Filters the widget title.
+			 *
+			 * @param string $title    Widget title.
+			 * @param array  $instance Widget settings.
+			 * @param string $id_base  Widget ID base.
+			 */
+			$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
 
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- generat per WP core.
 			echo $before_widget;
+
+			if ( '' !== $title ) {
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- generat per WP core.
+				echo $before_title . esc_html( $title ) . $after_title;
+			}
 			?>
 			<div class="wpt_widget_content"
 				id="<?php echo esc_attr( $widget_id ); ?>_content"
@@ -627,7 +700,7 @@ class TSOTAB_Widget extends WP_Widget {
 					<div class="wpt_thumbnail wpt_thumb_<?php echo esc_attr( $thumb_size ); ?>">
 						<a title="<?php the_title_attribute(); ?>" href="<?php the_permalink(); ?>">
 							<?php if ( has_post_thumbnail() ) : ?>
-								<?php the_post_thumbnail( 'wp_review_' . $thumb_size, array(
+								<?php the_post_thumbnail( 'large' === $thumb_size ? 'tsotab_img_large' : 'tsotab_img', array(
 									'title'   => '',
 									'loading' => 'lazy',
 								) ); ?>

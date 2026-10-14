@@ -30,6 +30,12 @@ msgstr "Muestra entradas populares, recientes, comentarios y etiquetas en format
 msgid "TSO Tabs Widget"
 msgstr "TSO Tabs Widget"
 
+msgid "Title:"
+msgstr "Título:"
+
+msgid "Leave blank to hide the title."
+msgstr "Déjalo en blanco para ocultar el título."
+
 msgid "Select Tabs"
 msgstr "Seleccionar pestañas"
 

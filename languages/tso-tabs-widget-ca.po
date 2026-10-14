@@ -30,6 +30,12 @@ msgstr "Mostra entrades populars, recents, comentaris i etiquetes en format de p
 msgid "TSO Tabs Widget"
 msgstr "TSO Tabs Widget"
 
+msgid "Title:"
+msgstr "Títol:"
+
+msgid "Leave blank to hide the title."
+msgstr "Deixa’l en blanc per amagar el títol."
+
 msgid "Select Tabs"
 msgstr "Selecciona pestanyes"
 

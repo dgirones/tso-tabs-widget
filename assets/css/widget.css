@@ -223,9 +223,30 @@ Version: 1.0.0
     display: block;
 }
 
+/* Mida fixa: si falta el fitxer de 65x65 (p. ex. avatar per defecte d'una pujada
+   antiga), WordPress serveix un altre més gran i l'avatar es veuria desproporcionat. */
+.wpt_widget_content .wpt_avatar img {
+    width: 65px;
+    height: 65px;
+    max-width: none;
+    object-fit: cover;
+}
+
 .wpt_comment_content p,
 .wpt_excerpt p {
     margin-bottom: 0;
+}
+
+/* El text dels comentaris queda en una columna a la dreta de l'avatar (no
+   s'embolcalla sota la imatge flotant) i sempre alineat a l'esquerra. */
+.wpt_widget_content .wpt_comment_meta,
+.wpt_widget_content .wpt_comment_content {
+    overflow: hidden;
+    text-align: left;
+}
+
+.wpt_widget_content .wpt_comment_content p {
+    text-align: left;
 }
 
 .wpt_comment_meta {

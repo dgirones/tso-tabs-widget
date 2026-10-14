@@ -126,21 +126,6 @@ function tsotab_update_stored_option( $id, $value ) {
 }
 
 /**
- * Delete stored option (canonical + legacy).
- *
- * @param string $id Symbolic option id.
- * @return bool
- */
-function tsotab_delete_stored_option( $id ) {
-	$key = tsotab_stored_option_key( $id );
-	$ok  = ( '' !== $key ) ? delete_option( $key ) : false;
-	foreach ( tsotab_stored_option_legacy_keys( $id ) as $legacy ) {
-		delete_option( $legacy );
-	}
-	return $ok;
-}
-
-/**
  * Get user meta (canonical, then legacy).
  *
  * @param int    $user_id User ID.
