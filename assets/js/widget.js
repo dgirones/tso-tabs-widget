@@ -8,6 +8,22 @@ function tsotabShowTabContent( $container, $tabContent ) {
 	$tabContent.addClass( 'tsotab-visible' );
 }
 
+function tsotabGetWidgetAjaxUrl( $container ) {
+	var url = $container.data( 'ajaxUrl' );
+	if ( ! url && typeof tsotabWidgetConfig !== 'undefined' ) {
+		url = tsotabWidgetConfig.ajaxUrl;
+	}
+	return url || '';
+}
+
+function tsotabGetWidgetNonce( $container ) {
+	var nonce = $container.data( 'nonce' );
+	if ( ! nonce && typeof tsotabWidgetConfig !== 'undefined' ) {
+		nonce = tsotabWidgetConfig.nonce;
+	}
+	return nonce || '';
+}
+
 /**
  * Load tab content via AJAX.
  *
@@ -31,11 +47,11 @@ function tsotabLoadTabContent( tab_slug, page_num, container, args_obj ) {
 
 		jQuery.ajax( {
 			type:    'POST',
-			url:     tsotabWidgetConfig.ajaxUrl,
+			url:     tsotabGetWidgetAjaxUrl( $container ),
 			timeout: 15000,
 			data:    {
 				action:        'tsotab_widget_content',
-				nonce:         tsotabWidgetConfig.nonce,
+				nonce:         tsotabGetWidgetNonce( $container ),
 				tab:           tab_slug,
 				page:          page_num,
 				args:          args_obj,

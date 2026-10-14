@@ -66,7 +66,7 @@ class TSOTAB_Widget extends WP_Widget {
 				'tsotab-widget',
 				'tsotabWidgetConfig',
 				array(
-					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+					'ajaxUrl' => esc_url( tsotab_get_ajax_url() ),
 					'nonce'   => wp_create_nonce( TSOTAB_NONCE_AJAX ),
 					'i18n'    => array(
 						'timeoutError' => esc_html__( 'Timeout loading content.', 'tso-tabs-widget' ),
@@ -376,6 +376,8 @@ class TSOTAB_Widget extends WP_Widget {
 			<div class="wpt_widget_content"
 				id="<?php echo esc_attr( $widget_id ); ?>_content"
 				data-widget-number="<?php echo esc_attr( $this->number ); ?>"
+				data-ajax-url="<?php echo esc_url( tsotab_get_ajax_url() ); ?>"
+				data-nonce="<?php echo esc_attr( wp_create_nonce( TSOTAB_NONCE_AJAX ) ); ?>"
 				data-args="<?php echo esc_attr( wp_json_encode( $js_instance ) ); ?>">
 				<ul class="wpt-tabs has-<?php echo absint( $tabs_count ); ?>-tabs">
 					<?php foreach ( $available_tabs as $tab => $label ) : ?>
@@ -417,7 +419,7 @@ class TSOTAB_Widget extends WP_Widget {
 
 		public function ajax_widget_content() {
 
-			if ( ! tsotab_verify_widget_ajax_nonce() ) {
+			if ( ! tsotab_verify_widget_ajax_request() ) {
 				wp_die( '', '', array( 'response' => 403 ) );
 			}
 
